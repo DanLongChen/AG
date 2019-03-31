@@ -12,9 +12,18 @@ public class L7 {
         while (x!=0){
             int xTemp=x%10;
             x/=10;
-            result=(result+xTemp)*10;
+            /**
+             * 这是两种会溢出的情况
+             */
+            if (result>Integer.MAX_VALUE/10 || (result==Integer.MAX_VALUE/10 &&xTemp>Integer.MAX_VALUE%10 )){
+                return 0;
+            }
+            if(result<Integer.MIN_VALUE/10 || (result==Integer.MIN_VALUE/10 && xTemp<Integer.MIN_VALUE%10)){
+                return 0;
+            }
+            result=result*10+xTemp;
         }
-        return result/10;
+        return result;
     }
 
     public static void main(String[] args) {
