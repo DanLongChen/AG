@@ -52,6 +52,28 @@ public class L17 {
                 list.add(temp);
             }
         }
+        /**
+         * 两个两个来进行组合
+         */
+        char[] numbers=digits.toCharArray();
+        List<String> result=new ArrayList<>();
+        result.add("");
+        for(char i:numbers){//用于获取是哪一个号码
+            List<String> resultTemp=new ArrayList<>();
+            for(char j:list.get(i-'0'-1)){//获取对应电话号码的字母
+                for(String k:result){
+                    k+=j;
+                    resultTemp.add(k);
+                }
+            }
+            result=resultTemp;
+        }
+        return result;
 
+
+    }
+
+    public static void main(String[] args) {
+        System.out.println(new L17().letterCombinations("23"));
     }
 }
