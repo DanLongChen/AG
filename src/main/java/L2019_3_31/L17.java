@@ -10,6 +10,9 @@ import java.util.List;
 public class L17 {
     public List<String> letterCombinations(String digits) {
         List<List<Character>> list = new ArrayList<>();
+        if (digits.length()==0){
+            return new ArrayList<String>();
+        }
         List<Character> temp=null;
         /**
          * 首先创建好对应表
@@ -74,6 +77,6 @@ public class L17 {
     }
 
     public static void main(String[] args) {
-        System.out.println(new L17().letterCombinations("23"));
+        System.out.println(new L17().letterCombinations(""));
     }
 }
