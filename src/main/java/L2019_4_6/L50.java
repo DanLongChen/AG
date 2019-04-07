@@ -33,7 +33,7 @@ public class L50 {
     public double myPow2(double x, int n) {
         /**
          * 将n分解为二进制 11=2^3+2^1+2^0;
-         * x^11=x^(2^3+2^1+2^0)=(x^2)^3*(x^2)^1*(x^2)^0
+         * x^11=x^(2^3+2^1+2^0)=x^8*x^2*x^1=(x^4)^2*(x^2)*(x^1)
          */
         double result=1.0;
         if(n==0 || x==0){
