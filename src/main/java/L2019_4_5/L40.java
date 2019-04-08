@@ -27,6 +27,9 @@ public class L40 {
 //        }
         for(int i=from;i<candidates.length;i++){
             if(target-candidates[i]>0){
+                /**
+                 * 让两个数不会被重复取（不能包含重复组合），这里只会添加一次相同的数字
+                 */
                 if (i>from && candidates[i]==candidates[i-1]){
                     continue;
                 }
