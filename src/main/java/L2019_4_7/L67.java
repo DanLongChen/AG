@@ -14,27 +14,32 @@ public class L67 {
         while (indexA>=0 && indexB>=0){
             tempA=a.charAt(indexA)-'0';
             tempB=b.charAt(indexB)-'0';
-            jinwei=(tempA+tempB+jinwei)/2;
             result.insert(0,(tempA+tempB+jinwei)%2);
+            jinwei=(tempA+tempB+jinwei)/2;
             indexA--;
             indexB--;
+            System.out.println(jinwei);
         }
         while (indexA>=0){
             tempA=a.charAt(indexA)-'0';
-            jinwei=(tempA+jinwei)/2;
             result.insert(0,(tempA+jinwei)%2);
+            jinwei=(tempA+jinwei)/2;
             indexA--;
         }
         while (indexB>=0){
             tempB=b.charAt(indexB)-'0';
-            jinwei=(tempB+jinwei)/2;
             result.insert(0,(tempB+jinwei)%2);
+            jinwei=(tempB+jinwei)/2;
             indexB--;
+        }
+        if (jinwei==1){
+            result.insert(0,jinwei);
         }
         return result.toString();
     }
 
     public static void main(String[] args) {
-        System.out.println(new L67().addBinary("101","11"));
+        System.out.println(new L67().addBinary("11","1"));
+
     }
 }

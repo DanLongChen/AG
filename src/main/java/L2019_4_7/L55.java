@@ -28,14 +28,14 @@ public class L55 {
             if (D[i-1]<i){
                 return false;
             }
-            D[i]=Math.max(D[i-1],i+nums[i]);
+            D[i]=Math.max(D[i-1],i+nums[i]);//表示前一个格子能到达的多还是当前这个格子能跳跃的多
         }
         /**
          * 表示可以到达倒数第二个
          */
         System.out.println(Arrays.toString(D));
         /**
-         * 长度下标从0开始记，所以长度要-1（nums.length-1）
+         * 长度下标从0开始记，所以长度要-1（nums.length-1），，，这里其实只需要判断倒数第二个能否到达最后一步即可（循环少做一次，空间减少一格）
          */
         if(D[nums.length-1]>=nums.length-1){
             return true;
