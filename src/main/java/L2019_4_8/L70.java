@@ -54,6 +54,9 @@ public class L70 {
         for(int i=1;i<=2;i++){
             result[0]++;
             handler(result,n-i);
+            /**
+             * 回溯
+             */
             result[0]--;
         }
     }
