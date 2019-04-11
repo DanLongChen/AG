@@ -13,11 +13,15 @@ public class L63 {
         if (obstacleGrid[0][0]==1){//0,0点就是障碍物，那就说明不能走
             return 0;
         }
-        if (obstacleGrid.length==1){
-            return 1;
-        }
+
         int row=obstacleGrid.length;//行数
         int col=obstacleGrid[0].length;//列数
+        /**
+         * 若右下角那个格子有障碍物，则不能到达
+         */
+        if (obstacleGrid[row-1][col-1]==1){
+            return 0;
+        }
         int[][] DP=new int[row][col];
         DP[0][0]=1;
         boolean flag=false;
