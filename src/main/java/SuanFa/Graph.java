@@ -4,8 +4,8 @@ package SuanFa;
  * Created by Paser on 2019/2/22.
  */
 public class Graph {
-    private char[] vt;
-    private int[][] vr;
+    private char[] vt;//表示每一个节点
+    private int[][] vr;//节点之间的邻接关系
     public void setVt(char[] vt){
         this.vt=vt;
     }
