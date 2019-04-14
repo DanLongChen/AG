@@ -38,16 +38,16 @@ public class L80 {
          * 进行清除
          */
         int index=0;
-        int length=nums.length;
-        while (index<nums.length){
+        int length=nums.length;//定义未指针，防止出现index指针不移动的情况
+        while (index<=length-1){
             if (nums[index]!=Integer.MAX_VALUE){
                 index++;
             }else{
-                if (index==nums.length-1){
-                    index++;
-                    length--;
-                    continue;
-                }
+//                if (index==nums.length-1){
+//                    index++;
+//                    length--;
+//                    continue;
+//                }
                 for (int i=index;i<nums.length-1;i++){
                     nums[i]=nums[i+1];
                 }
