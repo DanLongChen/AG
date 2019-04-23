@@ -56,7 +56,7 @@ public class L100 {
         }
         return true;
     }
-    public class TreeNode {
+    class TreeNode {
       int val;
       TreeNode left;
       TreeNode right;
