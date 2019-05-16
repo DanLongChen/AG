@@ -10,16 +10,14 @@ public class L44 {
             if (j<p.length() && (s.charAt(i)==p.charAt(j) || p.charAt(j)=='?')){//如果说刚好匹配或者是？（？可以充当任意一个字符）
                 ++i;
                 ++j;
-                iPoint=-1;//在两个具体匹配的时候跳过前一个*
-                jPoint=-1;
             }
             else if(j<p.length() && p.charAt(j)=='*'){//当前模式串的位置
                 iPoint=i;
                 jPoint=j++;
             }
             else if (iPoint>=0){//说明遇到了*
-                i=++iPoint;
-                j=jPoint+1;
+                i=++iPoint;//查看是用*匹配来得快还是用其他符号匹配来得快
+                j=jPoint+1;//指向匹配串中*的下一个位置
             }else{
                 return false;
             }
@@ -31,7 +29,7 @@ public class L44 {
     }
 
     public static void main(String[] args) {
-        System.out.println(new L44().isMatch("acdcb","a*c?b"));
+        System.out.println(new L44().isMatch("aa","*"));
         System.out.println("acdcb".matches("a*c?b"));
     }
 }
