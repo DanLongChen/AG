@@ -32,7 +32,7 @@ public class L142 {
             if(fast.next!=null){//需要判断是否是空指针
                 fast=fast.next.next;
             }else{
-                break;
+                break;//说明已经到达末尾
             }
 
             if(slow==fast){
