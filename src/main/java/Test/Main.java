@@ -6,47 +6,38 @@ import sun.security.util.AuthResources_it;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.lang.ref.SoftReference;
+import java.lang.ref.WeakReference;
+import java.util.*;
 
 /**
+ *
  * Created by Paser on 2019/2/27.
  */
 public class Main {
 
     public static void main(String[] args) {
-        Granpa p1=new Father();
-        Granpa p2=new Son();
-        p1.play();
-        p2.play();
+        WeakHashMap<Object,lala> weakHashMap=new WeakHashMap<>();
+        weakHashMap.put("123",new lala("123"));
+        System.out.println(weakHashMap.size());
+        System.gc();
+        System.gc();
+        System.out.println(weakHashMap.size());
+
+
     }
-    public void test(Granpa p){
-        System.out.println("Granpa");
-    }
-    public void test(Father p){
-        System.out.println("Granpa");
-    }
-    public void test(Son p){
-        System.out.println("Granpa");
-    }
+
 }
-class Granpa{
+class lala{
+    String name;
+
+    public lala(String name) {
+        this.name = name;
+    }
     public void play(){
-        System.out.println("Granpa");
+        System.out.println(name+"  "+"play");
     }
 }
-class Father extends Granpa{
-    @Override
-    public void play() {
-        System.out.println("Father");
-    }
-}
-class Son extends Father{
-    @Override
-    public void play() {
-        System.out.println("Son");
-    }
-}
+
 
 

@@ -34,7 +34,7 @@ public class L438 {
                 nums[s.charAt(right)-'a']--;//这样做是为了防止匹配串是aab这样子的情况
                 right++;
                 count--;
-            }else{
+            }else{//如果不是对应的值，那么出窗口，并且将其在nums中的值+1，这样子遇到这个值的时候会进入窗口
                 nums[s.charAt(left)-'a']++;
                 left++;
                 count++;
