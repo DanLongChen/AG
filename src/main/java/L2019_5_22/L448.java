@@ -14,7 +14,7 @@ import java.util.List;
 public class L448 {
     public static void main(String[] args) {
         int[] nums={1,1};
-        System.out.println(new L448().findDisappearedNumbers(nums));
+        System.out.println(new L448().findDisappearedNumbers1(nums));
     }
     public List<Integer> findDisappearedNumbers(int[] nums) {
         int length = nums.length;
@@ -33,7 +33,21 @@ public class L448 {
     }
     public List<Integer> findDisappearedNumbers1(int[] nums) {
         /**
-         * 使用正负标记法
+         * 使用正负标记法（首先标记哪些位置上的数已经有了）
          */
+        for (int i=0;i<nums.length;i++){
+            int index=Math.abs(nums[i])-1;
+            if(nums[index]>0){//如果没有标记过则进行标记，已经标记过的不需要再次标记
+                nums[index]=-nums[index];
+            }
+        }
+        List<Integer> result=new ArrayList<>();
+        for (int i=0;i<nums.length;i++)
+        {
+            if(nums[i]>0){
+                result.add(i+1);
+            }
+        }
+        return result;
     }
 }
