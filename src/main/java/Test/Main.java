@@ -15,29 +15,20 @@ import java.util.*;
  * Created by Paser on 2019/2/27.
  */
 public class Main {
-
+    public Object instance=null;
+    private static final int size=1024*1024;
+    private byte[] bytes=new byte[size];
     public static void main(String[] args) {
-        WeakHashMap<Object,lala> weakHashMap=new WeakHashMap<>();
-        weakHashMap.put("123",new lala("123"));
-        System.out.println(weakHashMap.size());
+        Main main1=new Main();
+        Main main2=new Main();
+        main1.instance=main2;
+        main2.instance=main1;
+        main1=null;
+        main2=null;
         System.gc();
-        System.gc();
-        System.out.println(weakHashMap.size());
-
-
-    }
-
-}
-class lala{
-    String name;
-
-    public lala(String name) {
-        this.name = name;
-    }
-    public void play(){
-        System.out.println(name+"  "+"play");
     }
 }
+
 
 
 

@@ -24,7 +24,7 @@ public class L494 {
     }
     public int findTargetSumWays(int[] nums, int S) {
         /**
-         * 递归
+         * 递归，当然可以用DP
          */
         return handler(nums,0,S);
     }
@@ -38,5 +38,26 @@ public class L494 {
         }
         return handler(nums,index+1,S-nums[index])+handler(nums,index+1,S+nums[index]);
 
+    }
+    public int DP(int[] nums, int S) {
+        if (nums == null || nums.length == 0){
+            return 0;
+        }
+        int sum = 0;
+        for (int num : nums){
+            sum += num;
+        }
+        if (sum < S || (sum + S) % 2 != 0){
+            return 0;
+        }
+        sum = (sum + S) / 2;
+        int[] dp = new int[sum + 1];
+        dp[0] = 1;
+        for (int num : nums){
+            for (int i = sum; i >= num; i--){
+                dp[i] += dp[i - num];
+            }
+        }
+        return dp[sum];
     }
 }
