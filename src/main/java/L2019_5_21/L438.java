@@ -16,6 +16,9 @@ public class L438 {
         System.out.println(result.toString());
     }
     public List<Integer> findAnagrams(String s, String p) {
+        /**
+         * 滑动窗口
+         */
         int[] nums=new int[26];//记录p中所有的字母所在的位置
         for (int i=0;i<p.length();i++){
             nums[p.charAt(i)-'a']++;
