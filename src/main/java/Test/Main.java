@@ -8,6 +8,9 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.lang.ref.SoftReference;
 import java.lang.ref.WeakReference;
+import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.Method;
+import java.lang.reflect.Proxy;
 import java.util.*;
 
 /**
@@ -15,17 +18,32 @@ import java.util.*;
  * Created by Paser on 2019/2/27.
  */
 public class Main {
-    public Object instance=null;
-    private static final int size=1024*1024;
-    private byte[] bytes=new byte[size];
+
     public static void main(String[] args) {
-        Main main1=new Main();
-        Main main2=new Main();
-        main1.instance=main2;
-        main2.instance=main1;
-        main1=null;
-        main2=null;
-        System.gc();
+        myClass readl=new myClass();
+        father proxy= (father) Proxy.newProxyInstance(readl.getClass().getClassLoader(),readl.getClass().getInterfaces(),new myInvokation(readl));
+        proxy.play();
+    }
+}
+class myInvokation implements InvocationHandler{
+    private Object object;
+    public myInvokation(Object object){
+        this.object=object;
+    }
+    @Override
+    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+        System.out.println("This is Proxy add");
+        return method.invoke(object,args);
+    }
+}
+interface father{//一定要声明接口
+    void play();
+}
+class myClass implements father{
+    public String name="MyName";
+    @Override
+    public void play(){
+        System.out.println(name);
     }
 }
 
