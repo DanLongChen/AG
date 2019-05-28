@@ -79,5 +79,26 @@ public class L101 {
         }
         return true;
     }
+    public boolean isSymmetric1(TreeNode root) {
+        /**
+         * 深搜
+         */
+        if(root==null){
+            return true;
+        }
+        return isMirror(root.left,root.right);
+    }
+    public boolean isMirror(TreeNode n1,TreeNode n2){
+        if (n1==null && n2==null){
+            return true;
+        }
+        if (n1==null || n2==null){
+            return false;
+        }
+        if (n1.val!=n2.val){
+            return false;
+        }
+        return isMirror(n1.left,n2.right) && isMirror(n1.right,n2.left);
+    }
 
 }
