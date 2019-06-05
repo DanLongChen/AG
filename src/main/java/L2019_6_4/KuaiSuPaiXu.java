@@ -61,5 +61,6 @@ public class KuaiSuPaiXu {
         int[] nums={5,2,4,3,1};
         new KuaiSuPaiXu().quickSort(nums,0,nums.length-1);
         System.out.println(Arrays.toString(nums));
+        System.out.println(3&5<<2);
     }
 }
