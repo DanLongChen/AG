@@ -2,6 +2,7 @@ package N2019_6_12;
 
 /**
  * Created by DanLongChen on 2019/6/12
+ * 反转链表
  **/
 public class fanzhaunlianbiao {
     private class ListNode {
