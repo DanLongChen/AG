@@ -19,7 +19,7 @@ public class XuanZhuanShuZuZuiXiaoZhi {
                 right=mid;
             }
         }
-        return array[0];
+        return array[0];//旋转0个数字的情况
     }
 
     public static void main(String[] args) {

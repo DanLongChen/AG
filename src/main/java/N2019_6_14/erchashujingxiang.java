@@ -16,6 +16,9 @@ public class erchashujingxiang {
 
     }
     public void Mirror(TreeNode root) {
+        /**
+         * 先序遍历，依次交换
+         */
         if (root==null){
             return;
         }

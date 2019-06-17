@@ -4,7 +4,7 @@ import L2019_3_26.MaxSubArray;
 
 /**
  * Created by DanLongChen on 2019/6/11
- * 剪绳子问题
+ * 剪绳子问题：给定一个长度一定的绳子，剪成若干段，求其乘积的最大值
  **/
 public class JianShengZi {
     public int DP(int length){
@@ -17,7 +17,7 @@ public class JianShengZi {
         dp[2]=2;
         dp[3]=3;
         int max=0;
-        for (int i=4;i<=length;i++){
+        for (int i=4;i<=length;i++){//i表示长度
             max=0;
             for (int j=1;j<=i;j++){
                 if(dp[j]*dp[i-j]>max){
