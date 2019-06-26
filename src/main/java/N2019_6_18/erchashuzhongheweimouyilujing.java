@@ -19,6 +19,9 @@ public class erchashuzhongheweimouyilujing {
 
     }
     public ArrayList<ArrayList<Integer>> FindPath(TreeNode root, int target) {
+        /**
+         * 使用递归
+         */
         ArrayList<ArrayList<Integer>> result=new ArrayList<>();
         if (root==null){
             return result;
