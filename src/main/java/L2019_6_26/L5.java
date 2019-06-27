@@ -46,4 +46,60 @@ public class L5 {
         }
         return "";
     }
+    public String longestPalindrome1(String s) {
+        /**
+         * 使用DP
+         */
+        if(s==null || s.length()==0){
+            return "";
+        }
+        int[][] dp=new int[s.length()][s.length()];//表示起点和终点是否为回文
+        int start=0;//表示起点
+        int length=1;//表示回文的长度
+        for(int i=0;i<s.length();i++){
+            dp[i][i]=1;
+            if(i<s.length()-1)
+                if(s.charAt(i)==s.charAt(i+1)){
+                    dp[i][i+1]=1;
+                    start=i;
+                    length=2;
+                }
+        }
+        for(int l=3;l<=s.length();l++){//表示长度
+            for(int i=0;i+l-1<s.length();i++){//起点，终点为i+l-1要<s.length()
+                int j=i+l-1;
+                if(s.charAt(i)==s.charAt(j) && dp[i+1][j-1]==1){
+                    dp[i][j]=1;
+                    start=i;
+                    length=l;
+                }
+
+            }
+        }
+        return s.substring(start,start+length);
+    }
+    public String longestPalindrome2(String s) {
+        //中心扩展
+        if(s==null || s.length()==0){
+            return "";
+        }
+        int start=0,end=0;
+        for(int i=0;i<s.length();i++){
+            int len1=handler(s,i,i);//单核扩展
+            int len2=handler(s,i,i+1);//双核扩展
+            int len=Math.max(len1,len2);
+            if(len>end-start+1){
+                start=i-(len-1)/2;//从当前节点往前推算起始节点
+                end=i+len/2;//从当前节点推算重点（这个可以自己代数看看）
+            }
+        }
+        return s.substring(start,end+1);
+    }
+    private int handler(String s,int start,int end){
+        while(start>=0 && end<s.length() && s.charAt(start)==s.charAt(end)){
+            start--;
+            end++;
+        }
+        return end-start-1;//end-start-2+1，因为start--，end++会超过边界，所以需要返回操作
+    }
 }
