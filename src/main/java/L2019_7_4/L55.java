@@ -6,6 +6,10 @@ package L2019_7_4;
  *
  **/
 public class L55 {
+    public static void main(String[] args) {
+        int[] nums={2,3,1,1,4};
+        System.out.println(new L55().canJump2(nums));
+    }
     public boolean canJump(int[] nums) {
         /**
          * 顺藤摸瓜（贪心）：从先往后进行查找，查找当前点可以到达的最远距离
@@ -36,7 +40,7 @@ public class L55 {
         int[] dp=new int[nums.length];
         dp[0]=nums[0];
         for(int i=1;i<nums.length;i++){
-            if(dp[i-1]<i){//i-1步不能到达当前点
+            if(dp[i-1]<i){//i-1步不能到达当前点(前一步不能到达当前点)
                 return false;
             }
             dp[i]=Math.max(dp[i-1],i+nums[i]);
@@ -45,5 +49,25 @@ public class L55 {
             }
         }
         return false;
+    }
+    public boolean canJump2(int[] nums) {
+        //顺瓜摸藤
+        //从后面开始判断，找到可以跳到当前点的前一个点，然后以当前点作为重点再继续往前找
+        int position=nums.length-1;
+        boolean flag;//表示可以跳到
+        while(position>0){
+            flag=false;
+            for(int i=position-1;i>=0;i--){
+                if(i+nums[i]>=position){
+                    position=i;
+                    flag=true;
+                    break;
+                }
+            }
+            if(!flag){
+                return false;
+            }
+        }
+        return true;
     }
 }

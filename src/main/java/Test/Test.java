@@ -1,10 +1,11 @@
 package Test;
 
 
+import com.sun.xml.internal.bind.v2.model.core.ID;
+
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.CopyOnWriteArrayList;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -13,31 +14,40 @@ import java.util.concurrent.locks.ReentrantLock;
  **/
 public class Test {
     public static void main(String[] args) throws InterruptedException {
-        counter counter =new counter();
-        ReentrantLock lock = new ReentrantLock();
+
+        CyclicBarrier cyclicBarrier=new CyclicBarrier(5, new Runnable() {
+            @Override
+            public void run() {
+                System.out.println("finished！");
+            }
+        });
         for(int i=0;i<5;i++){
-           Thread thread=new Thread(counter);
-           thread.start();
-       }
-    }
-    private static class counter implements Runnable{
-        private AtomicInteger point=new AtomicInteger(0);
-
-        synchronized private void doCount(){
-            if(point.get()<=100){
-                System.out.println(point.getAndIncrement());
-            }
+            Thread thread=new Thread(new handler(i,cyclicBarrier));
+            thread.start();
         }
+        cyclicBarrier.reset();
+        System.out.println("man finished");
+    }
 
-        @Override
-        public void run() {
-            while (true){
-                doCount();
-                if(point.get()>100){
-                    break;
-                }
-            }
+}
+class handler implements Runnable{
+    private int id;
+    private CyclicBarrier cyclicBarrier;
+    public handler(int id,CyclicBarrier cyclicBarrier){
+        this.id=id;
+        this.cyclicBarrier=cyclicBarrier;
+    }
+
+    @Override
+    public void run() {
+        try {
+            System.out.println(id+" start");
+            cyclicBarrier.await();
+            System.out.println(id+" start work");
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (BrokenBarrierException e) {
+            e.printStackTrace();
         }
     }
 }
-
