@@ -14,7 +14,6 @@ import java.util.concurrent.locks.ReentrantLock;
  **/
 public class Test {
     public static void main(String[] args) throws InterruptedException {
-
         CyclicBarrier cyclicBarrier=new CyclicBarrier(5, new Runnable() {
             @Override
             public void run() {
