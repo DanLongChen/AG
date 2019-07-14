@@ -1,12 +1,14 @@
 package Test;
 
 
-import com.sun.xml.internal.bind.v2.model.core.ID;
 
+import java.lang.reflect.Proxy;
 import java.util.ArrayList;
+import java.util.Hashtable;
+import java.util.LinkedList;
 import java.util.List;
-import java.util.concurrent.*;
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
@@ -14,39 +16,48 @@ import java.util.concurrent.locks.ReentrantLock;
  **/
 public class Test {
     public static void main(String[] args) throws InterruptedException {
-        CyclicBarrier cyclicBarrier=new CyclicBarrier(5, new Runnable() {
-            @Override
-            public void run() {
-                System.out.println("finished！");
-            }
-        });
-        for(int i=0;i<5;i++){
-            Thread thread=new Thread(new handler(i,cyclicBarrier));
-            thread.start();
+        List<User> list = new ArrayList<>();
+        List<User> list1=new LinkedList<>();
+        long now1=System.currentTimeMillis();
+        for(int i=0;i<50000000;i++){
+            list.add(new User());
         }
-        cyclicBarrier.reset();
-        System.out.println("man finished");
+
+        System.out.println("time1:"+(System.currentTimeMillis()-now1));
+        long now2=System.currentTimeMillis();
+        for(int i=0;i<50000000;i++){
+            list1.add(new User());
+        }
+        System.out.println("time2:"+(System.currentTimeMillis()-now2));
+        Hashtable hashtable=new Hashtable();
+        for (int i=0;i<10;i++){
+            hashtable.put(i,new User());
+        }
     }
+    public static void play(){
+        Lock lock=new ReentrantLock(false);
+        lock.lock();
+    }
+
 
 }
-class handler implements Runnable{
-    private int id;
-    private CyclicBarrier cyclicBarrier;
-    public handler(int id,CyclicBarrier cyclicBarrier){
-        this.id=id;
-        this.cyclicBarrier=cyclicBarrier;
+class User{
+    private int age;
+    private String name;
+
+    public int getAge() {
+        return age;
     }
 
-    @Override
-    public void run() {
-        try {
-            System.out.println(id+" start");
-            cyclicBarrier.await();
-            System.out.println(id+" start work");
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (BrokenBarrierException e) {
-            e.printStackTrace();
-        }
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }
