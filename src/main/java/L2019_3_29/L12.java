@@ -43,7 +43,7 @@ public class L12 {
                 num-=90;
             }
             if(num>=50){
-                result+="L";
+                result+="L240";
                 num-=50;
             }
             if(num>=40){
