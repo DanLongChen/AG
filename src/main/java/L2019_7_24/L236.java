@@ -51,6 +51,7 @@ public class L236 {
             set.add(p);
             p=map.get(p);
         }
+
         while (q!=null){
             if(set.contains(q)){
                 return q;
