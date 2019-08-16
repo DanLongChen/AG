@@ -1,12 +1,8 @@
 package Test;
 
 
-
 import java.lang.reflect.Proxy;
-import java.util.ArrayList;
-import java.util.Hashtable;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
@@ -16,32 +12,46 @@ import java.util.concurrent.locks.ReentrantLock;
  **/
 public class Test {
     public static void main(String[] args) throws InterruptedException {
-        List<User> list = new ArrayList<>();
-        List<User> list1=new LinkedList<>();
-        long now1=System.currentTimeMillis();
-        for(int i=0;i<50000000;i++){
-            list.add(new User());
-        }
-
-        System.out.println("time1:"+(System.currentTimeMillis()-now1));
-        long now2=System.currentTimeMillis();
-        for(int i=0;i<50000000;i++){
-            list1.add(new User());
-        }
-        System.out.println("time2:"+(System.currentTimeMillis()-now2));
-        Hashtable hashtable=new Hashtable();
-        for (int i=0;i<10;i++){
-            hashtable.put(i,new User());
-        }
+        System.out.println(handler(12354));
     }
-    public static void play(){
-        Lock lock=new ReentrantLock(false);
+    public static int handler(int num ){
+        int result = 0;
+        int i = num;
+        while (i !=0 )
+        {
+            i = i/10*10;
+            result = result * 10 + num - i;
+            i = i /10;
+            num = num/10;
+        }
+        return result;
+    }
+
+    static double jishuPI(double z) {
+        double sum = 2;
+        int n = 1;
+        int m = 3;
+        double t = 2;
+        while (t > z) {
+            t = t * n / m;
+            sum = sum + t;
+            n++;
+            m += 2;
+
+
+        }
+        return sum;
+    }
+
+    public static void play() {
+        Lock lock = new ReentrantLock(false);
         lock.lock();
     }
 
 
 }
-class User{
+
+class User {
     private int age;
     private String name;
 
